@@ -1,10 +1,10 @@
-resource "aws_vpc" "node_app_vpc" {
+resource "aws_vpc" "express_app_vpc" {
   cidr_block = "10.0.0.0/16"
   instance_tenancy = "default"
   enable_dns_hostnames = true
 
   tags = {
-   Name = "Node_app_vpc"
+   Name = "express_app"
   }
 }
 
