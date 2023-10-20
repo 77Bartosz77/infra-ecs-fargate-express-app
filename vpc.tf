@@ -59,7 +59,7 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.express_app_vpc
+  vpc_id = aws_vpc.express_app_vpc.id
 }
 
 resource "aws_route_table" "rt" {
