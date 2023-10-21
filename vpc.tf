@@ -13,6 +13,9 @@ resource "aws_subnet" "sn1" {
   vpc_id = aws_vpc.express_app_vpc.id
   availability_zone = "eu-north-1a"
   map_public_ip_on_launch = true
+  tags = {
+    Name = "express_app_sn1"
+  }
 }
 
 resource "aws_subnet" "sn2" {
@@ -20,6 +23,9 @@ resource "aws_subnet" "sn2" {
   vpc_id = aws_vpc.express_app_vpc.id
   availability_zone = "eu-north-1b"
   map_public_ip_on_launch = true
+  tags = {
+    Name = "express_app_sn2"
+  }
 }
 
 resource "aws_subnet" "sn3" {
@@ -27,11 +33,14 @@ resource "aws_subnet" "sn3" {
   vpc_id = aws_vpc.express_app_vpc.id
   availability_zone = "eu-north-1c"
   map_public_ip_on_launch = true
+  tags = {
+    Name = "express_app_sn3"
+  }
 }
 
 
-resource "aws_security_group" "sg" {
-  name = "sg"
+resource "aws_security_group" "express_app_sg" {
+  name = "express_app_sg"
   vpc_id = aws_vpc.express_app_vpc.id
 
   ingress {
@@ -60,6 +69,9 @@ resource "aws_security_group" "sg" {
 
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.express_app_vpc.id
+  tags = {
+    Name = "express_app"
+  }
 }
 
 resource "aws_route_table" "rt" {
@@ -73,6 +85,9 @@ resource "aws_route_table" "rt" {
   route {
     ipv6_cidr_block = "::/0"
     gateway_id      = aws_internet_gateway.gw.id
+  }
+  tags = {
+    Name = "express_app"
   }
 }
 
