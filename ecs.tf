@@ -10,8 +10,11 @@ resource "aws_ecs_service" "service" {
 
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
-  desired_count                      = 3
   task_definition                    = aws_ecs_task_definition.td.arn
+
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
 
  load_balancer {
    target_group_arn = aws_lb_target_group.ecs_tg.arn
