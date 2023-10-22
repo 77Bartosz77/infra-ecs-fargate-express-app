@@ -10,9 +10,14 @@ resource "aws_ecs_service" "service" {
 
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
-  desired_count                      = 1
+  desired_count                      = 3
   task_definition                    = aws_ecs_task_definition.td.arn
 
+ load_balancer {
+   target_group_arn = aws_lb_target_group.ecs_tg.arn
+   container_name   = "express_app"
+   container_port   = 80
+ }
   network_configuration {
     assign_public_ip = true
     security_groups  = [aws_security_group.express_app_sg.id]
